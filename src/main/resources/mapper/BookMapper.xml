@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njupt.dao.BookMapper">
+
+    <resultMap id="BookResult" type="com.njupt.entity.BookEntity">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+    </resultMap>
+
+    <sql id="AllFields">
+    id, name, number
+    </sql>
+
+    <insert id="addBook" parameterType="BookEntity">
+        INSERT INTO book(name, number)
+        VALUES (
+        #{entity.name},
+        #{entity.number}
+        )
+    </insert>
+
+    <select id="loadBookById" resultType="BookEntity">
+        SELECT
+        <include refid="AllFields"/>
+        FROM book
+        WHERE id = #{id}
+    </select>
+
+</mapper>
